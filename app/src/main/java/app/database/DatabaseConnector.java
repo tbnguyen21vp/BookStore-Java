@@ -9,7 +9,14 @@ public class DatabaseConnector {
     private static final String DATABASE_USER = "your_username";
     private static final String DATABASE_PASSWORD = "your_password";
 
-    public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+    public Connection getConnection() {
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+        } catch (SQLException e) {
+            System.out.println("Không thể kết nối đến cơ sở dữ liệu MySQL.");
+            e.printStackTrace();
+        }
+        return connection;
     }
 }

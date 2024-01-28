@@ -5,26 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccc56ca4-0da7-42db-b730-314f8aa2bef4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/admin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/book.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/model/employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../App/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../App/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../App/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../App/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../App/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../App/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../App/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../App/src/main/java/module-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../App/src/main/java/org/example/app/HelloApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../App/src/main/java/org/example/app/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../App/src/main/resources/org/example/app/hello-view.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/app.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Docker/mysql.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../Docker/mysql.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/database/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/database/DatabaseConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/home/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/home/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/home/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/home/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/app/home/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/home/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +21,23 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="home" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
