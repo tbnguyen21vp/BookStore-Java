@@ -5,7 +5,6 @@
 package bookstorre;
 
 /**
- *
  * @author bourbon
  */
 public class NewClass {
