@@ -3,13 +3,33 @@
  */
 package bookstorre;
 
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
+import com.formdev.flatlaf.FlatDarkLaf; // Hoặc FlatLightLaf tùy bạn chọn
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+   
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        System.out.println(new App().getGreeting());
+    //    SwingUtilities.invokeLater(new Runnable() {
+    //         public void run() {
+    //             new LoginWindow().setVisible(true);
+    //         }
+    //     });
+       try {
+        UIManager.setLookAndFeel(new FlatDarkLaf()); // Áp dụng theme tối
+    } catch (Exception ex) {
+        System.err.println("Failed to initialize LaF");
+    }
+
+    // Tạo và hiển thị giao diện của ứng dụng
+    javax.swing.SwingUtilities.invokeLater(new Runnable() {
+        public void run() {
+            // Tạo và cấu hình cửa sổ ứng dụng của bạn ở đây
+            new LoginWindow().setVisible(true);
+
+        }
+    });
     }
 }
