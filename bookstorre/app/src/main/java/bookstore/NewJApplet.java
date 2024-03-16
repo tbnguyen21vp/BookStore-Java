@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/JApplet.java to edit this template
  */
-package bookstorre;
+package bookstore;
 
 import javax.swing.JApplet;
 

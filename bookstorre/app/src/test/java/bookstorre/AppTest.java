@@ -4,6 +4,9 @@
 package bookstorre;
 
 import org.junit.jupiter.api.Test;
+
+import bookstore.App;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
