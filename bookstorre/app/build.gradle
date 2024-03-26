@@ -20,7 +20,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
+    implementation 'mysql:mysql-connector-java:8.0.23' 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:32.1.1-jre'
     implementation 'com.formdev:flatlaf:1.6'
