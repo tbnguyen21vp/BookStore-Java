@@ -10,9 +10,17 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
+import com.raven.event.EventMenuSelected;
 
 public class Menu extends javax.swing.JPanel {
+    
+    private EventMenuSelected event;
 
+    public void addEventMenuSelected(EventMenuSelected event) {
+        this.event = event;
+        listMenu1.addEventMenuSelected(event);
+    }
+    
     public Menu() {
         initComponents();
         setOpaque(false);
@@ -21,6 +29,7 @@ public class Menu extends javax.swing.JPanel {
     }
 
     private void init() {
+        listMenu1.addItem(new Model_Menu("home", "Trang Chủ", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("1", "Sách", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("2", "Danh Mục Sách", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("3", "Tác Giả", Model_Menu.MenuType.MENU));
