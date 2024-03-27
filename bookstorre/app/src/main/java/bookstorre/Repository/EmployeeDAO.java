@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDAO  {
+public class EmployeeDAO {
     private static final String SELECT_BOOK_BY_ID = "SELECT * FROM books WHERE bookID = ?";
     private static final String SELECT_ALL_BOOKS = "SELECT * FROM books";
     private static final String UPDATE_BOOK_SQL = "UPDATE books SET ... WHERE bookID = ?";
@@ -21,6 +21,8 @@ public class EmployeeDAO  {
 
         // Existing code...
     }
+
+    private DatabaseUtils databaseUtils;
 
     public List<Book> getAllBooks() throws SQLException, ClassNotFoundException {
         List<Book> books = new ArrayList<>();
@@ -47,10 +49,14 @@ public class EmployeeDAO  {
         }
     }
 
-    DatabaseUtils databaseUtils = new DatabaseUtils(); // Create an instance of DatabaseUtils
-    try (Connection connection = databaseUtils.connect();
-            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BOOK_SQL)) {
-        preparedStatement.setString(1, bookID);
-        preparedStatement.executeUpdate();
+    public boolean deleteBook(String bookID) throws SQLException, ClassNotFoundException {
+        DatabaseUtils databaseUtils = new DatabaseUtils(); // Create an instance of DatabaseUtils
+        try (Connection connection = databaseUtils.connect();
+                PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BOOK_SQL)) {
+            preparedStatement.setString(1, bookID);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        }
     }
+
 }
