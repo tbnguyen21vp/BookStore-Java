@@ -23,33 +23,13 @@ public class BookService {
         }
     }
 
-    // Retrieves a book by its ID
-    public Book getBook(String bookID) {
-        return bookDAO.selectBook(bookID);
-    }
-
-    // Retrieves all books from the database
-    public List<Book> getAllBooks() {
-        return bookDAO.selectAllBooks();
-    }
-
-    // Updates an existing book's details
-    public boolean updateBook(Book book) {
+    // get all books
+    public List<Book> getAllBooks() throws ClassNotFoundException {
         try {
-            return bookDAO.updateBook(book);
+            return bookDAO.getAllBooks();
         } catch (SQLException e) {
-            System.out.println("Error updating book: " + e.getMessage());
-            return false;
-        }
-    }
-
-    // Deletes a book from the database
-    public boolean deleteBook(String bookID) {
-        try {
-            return bookDAO.deleteBook(bookID);
-        } catch (SQLException e) {
-            System.out.println("Error deleting book: " + e.getMessage());
-            return false;
+            System.out.println("Error getting all books: " + e.getMessage());
+            return null;
         }
     }
 }

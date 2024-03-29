@@ -5,13 +5,16 @@ public class User {
     private String userName;
     private String password;
     private Boolean status;
+    private String Firstname;
+    private String Lastname;
 
-
-    public User(String userID, String userName, String password, Boolean status) {
+    public User(String userID, String userName, String password, Boolean status, String Firstname, String Lastname) {
         this.userID = userID;
         this.userName = userName;
         this.password = password;
         this.status = status;
+        this.Firstname = Firstname;
+        this.Lastname = Lastname;
     }
 
     // Getters
@@ -31,12 +34,20 @@ public class User {
         return status;
     }
 
+    public String getFirstname() {
+        return Firstname;
+    }
+
+    public String getLastname() {
+        return Lastname;
+    }
+
     // Setters
 
     public void setUserID(String userID) {
         this.userID = userID;
     }
-    
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -49,18 +60,12 @@ public class User {
         this.status = status;
     }
 
-    @Override
-
-    public String toString() {
-        return "User{" +
-                "userID='" + userID + '\'' +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", status=" + status +
-                '}';
+    public void setFirstname(String Firstname) {
+        this.Firstname = Firstname;
     }
 
+    public void setLastname(String Lastname) {
+        this.Lastname = Lastname;
+    }
 
-    
-    
 }

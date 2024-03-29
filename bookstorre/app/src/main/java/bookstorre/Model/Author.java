@@ -32,13 +32,5 @@ public class Author {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "Author{" +
-                "authorID='" + authorID + '\'' +
-                ", authorName='" + authorName + '\'' +
-                ", status=" + status +
-                '}';
-    }
 
 }

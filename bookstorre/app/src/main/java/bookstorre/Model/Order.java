@@ -23,25 +23,63 @@ public class Order {
         this.status = status;
     }
 
-    // Getters and setters for all properties
-    // ...
-
-    // Implement createOrder
-    // public void createOrder(OrderDetails orderDetails) {
-    //     // Logic to create an order using the provided orderDetails
-    // }
-
-    // Implement updateOrder
-    // public void updateOrder(OrderDetails orderDetails) {
-    //     // Logic to update the order using the provided orderDetails
-    // }
-
-    // Implement calculateTotalCost
-    public double calculateTotalCost() {
-        // Logic to calculate the total cost of the order
-        return totalCost - discount;
+    // Getters
+    public String getOrderID() {
+        return orderID;
     }
 
-    // Getters and Setters (auto-generated for brevity)
-    // ...
+    public Date getDate() {
+        return date;
+    }
+
+    public String getCustomerID() {
+        return customerID;
+    }
+
+    public String getEmployeeID() {
+        return employeeID;
+    }
+
+    public Double getTotalCost() {
+        return totalCost;
+    }
+
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    // Setters
+
+    public void setOrderID(String orderID) {
+        this.orderID = orderID;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
+    }
+
+    public void setEmployeeID(String employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public void setTotalCost(Double totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }

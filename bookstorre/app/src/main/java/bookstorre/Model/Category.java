@@ -1,6 +1,8 @@
 package bookstorre.Model;
 
-public class Caretory {
+import java.sql.ResultSet;
+
+public class Category {
     private String categoryID;
     private String categoryName;
     private String categoryDescription;
@@ -51,11 +53,15 @@ public class Caretory {
                 '}';
     }
 
-    public Caretory(String categoryID, String categoryName, String categoryDescription, Boolean status) {
+    public Category(String categoryID, String categoryName, String categoryDescription, Boolean status) {
         this.categoryID = categoryID;
         this.categoryName = categoryName;
         this.categoryDescription = categoryDescription;
         this.status = status;
+    }
+
+    public Category(ResultSet rs) {
+        //TODO Auto-generated constructor stub
     }
 
 }

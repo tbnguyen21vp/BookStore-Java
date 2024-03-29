@@ -5,6 +5,8 @@ import java.sql.*;
 import javax.sql.PooledConnection;
 import javax.xml.crypto.Data;
 
+import com.mysql.cj.xdevapi.PreparableStatement;
+
 public class DatabaseUtils {
     private String url;
     private String user;
@@ -23,15 +25,54 @@ public class DatabaseUtils {
     }
 
     // Change the access modifier to public
-    public  Connection connect() throws ClassNotFoundException, SQLException {
+    public static Connection connect() throws ClassNotFoundException, SQLException {
         // Load the MySQL JDBC driver
         Class.forName("com.mysql.cj.jdbc.Driver");
         // Establish a connection
         return DriverManager.getConnection(url, user, password);
     }
+
+    public void printTableNames() {
+        try (Connection conn = connect()) {
+            // Get DatabaseMetaData
+            DatabaseMetaData dbmd = conn.getMetaData();
+            // Get a list of tables
+            ResultSet rs = dbmd.getTables(null, null, null, new String[] { "TABLE" });
+            // Print the table names
+            while (rs.next()) {
+                System.out.println(rs.getString("TABLE_NAME"));
+            }
+        } catch (ClassNotFoundException e) {
+            System.out.println("MySQL JDBC driver not found");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Error connecting to the database");
+            e.printStackTrace();
+        }
+    }
+
+    public PreparableStatement prepareStatement(String string) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'prepareStatement'");
+    }
+
 }
 
 /*
+ * 
+ * 
+ * 
+ * DatabaseUtils databaseUtils = new DatabaseUtils();
+ * 
+ * try {
+ * databaseUtils.connect();
+ * System.out.println("Kết nối thành công");
+ * databaseUtils.printTableNames();
+ * } catch (ClassNotFoundException e) {
+ * System.out.println("Không tìm thấy driver cơ sở dữ liệu: " + e.getMessage());
+ * }
+ * 
+ * 
  * 
  * private PooledConnection connectPool() throws ClassNotFoundException,
  * SQLException {

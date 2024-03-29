@@ -14,10 +14,8 @@ public class AuthorDAO {
     private static final String UPDATE_AUTHOR_SQL = "UPDATE authors SET authorName = ?, status = ? WHERE authorID = ?";
     private static final String DELETE_AUTHOR_SQL = "DELETE FROM authors WHERE authorID = ?";
 
-    public AuthorDAO() {
-    }
-
-    public void insertAuthor(Author author) throws SQLException {
+    // add author
+    public void addAuthor(Author author) throws SQLException {
         try (Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_AUTHOR_SQL)) {
             preparedStatement.setString(1, author.getAuthorID());
@@ -29,10 +27,62 @@ public class AuthorDAO {
         }
     }
 
+    // update author
+    public boolean updateAuthor(Author author) throws SQLException {
+        boolean rowUpdated;
+        try (Connection connection = new DatabaseUtils().connect();
+                PreparedStatement statement = connection.prepareStatement(UPDATE_AUTHOR_SQL)) {
+            statement.setString(1, author.getAuthorName());
+            statement.setBoolean(2, author.getStatus());
+            statement.setString(3, author.getAuthorID());
+
+            rowUpdated = statement.executeUpdate() > 0;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            rowUpdated = false;
+        }
+        return rowUpdated;
+    }
+
+    // disable author
+    public boolean disableAuthor(String authorID) throws SQLException {
+        boolean rowUpdated;
+        try (Connection connection = new DatabaseUtils().connect();
+                PreparedStatement statement = connection.prepareStatement(UPDATE_AUTHOR_SQL)) {
+            statement.setBoolean(2, false);
+            statement.setString(3, authorID);
+
+            rowUpdated = statement.executeUpdate() > 0;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            rowUpdated = false;
+        }
+        return rowUpdated;
+    }
+
+    // enable author
+
+    public boolean enableAuthor(String authorID) throws SQLException {
+        boolean rowUpdated;
+        try (Connection connection = new DatabaseUtils().connect();
+                PreparedStatement statement = connection.prepareStatement(UPDATE_AUTHOR_SQL)) {
+            statement.setBoolean(2, true);
+            statement.setString(3, authorID);
+
+            rowUpdated = statement.executeUpdate() > 0;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            rowUpdated = false;
+        }
+        return rowUpdated;
+    }
+
+    // delete author
+
     public Author selectAuthor(String authorID) throws SQLException {
         Author author = null;
         try (Connection connection = new DatabaseUtils().connect();
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_AUTHOR_BY_ID)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_AUTHOR_BY_ID)) {
             preparedStatement.setString(1, authorID);
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -50,10 +100,11 @@ public class AuthorDAO {
         return author;
     }
 
+    // select all authors
     public List<Author> selectAllAuthors() throws SQLException {
         List<Author> authors = new ArrayList<>();
         try (Connection connection = new DatabaseUtils().connect();
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_AUTHORS)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_AUTHORS)) {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
@@ -72,21 +123,7 @@ public class AuthorDAO {
         return authors;
     }
 
-    public boolean updateAuthor(Author author) throws SQLException {
-        boolean rowUpdated;
-        try (Connection connection = new DatabaseUtils().connect();
-                PreparedStatement statement = connection.prepareStatement(UPDATE_AUTHOR_SQL)) {
-            statement.setString(1, author.getAuthorName());
-            statement.setBoolean(2, author.getStatus());
-            statement.setString(3, author.getAuthorID());
-
-            rowUpdated = statement.executeUpdate() > 0;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            rowUpdated = false;
-        }
-        return rowUpdated;
-    }
+    // delete author
 
     public boolean deleteAuthor(String authorID) throws SQLException {
         boolean rowDeleted;
