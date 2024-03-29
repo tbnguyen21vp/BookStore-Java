@@ -1,4 +1,4 @@
-package bookstorre.utils;
+package store.utils;
 
 import java.sql.*;
 
@@ -8,9 +8,9 @@ import javax.xml.crypto.Data;
 import com.mysql.cj.xdevapi.PreparableStatement;
 
 public class DatabaseUtils {
-    private String url;
-    private String user;
-    private String password;
+    private static String url;
+    private static String user;
+    private static String password;
 
     public DatabaseUtils() {
         this.url = "jdbc:mysql://localhost:3307/bookstore";

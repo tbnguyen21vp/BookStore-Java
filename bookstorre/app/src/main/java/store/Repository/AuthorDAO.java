@@ -1,11 +1,11 @@
-package bookstorre.Repository;
-
-import bookstorre.Model.Author;
-import bookstorre.utils.DatabaseUtils;
+package store.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import store.Model.Author;
+import store.utils.DatabaseUtils;
 
 public class AuthorDAO {
     private static final String INSERT_AUTHOR_SQL = "INSERT INTO authors (authorID, authorName, status) VALUES (?, ?, ?)";

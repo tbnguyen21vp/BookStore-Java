@@ -1,10 +1,11 @@
-package bookstorre.Repository;
+package store.Repository;
 
-import bookstorre.Model.Publisher;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import bookstorre.utils.DatabaseUtils;
+
+import store.Model.Publisher;
+import store.utils.DatabaseUtils;
 
 public class PublisherDAO {
     private static final String INSERT_PUBLISHER_SQL = "INSERT INTO publishers (publisherID, publisherName, status) VALUES (?, ?, ?)";

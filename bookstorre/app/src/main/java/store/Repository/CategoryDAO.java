@@ -1,4 +1,4 @@
-package bookstorre.Repository;
+package store.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import bookstorre.Model.Category;
-import bookstorre.utils.DatabaseUtils;
+import store.Model.Category;
+import store.utils.DatabaseUtils;
 
 public class CategoryDAO {
     private static final String SELECT_CATEGORY_BY_ID = "SELECT * FROM categories WHERE categoryID = ?";

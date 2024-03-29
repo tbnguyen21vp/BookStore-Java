@@ -1,4 +1,4 @@
-package bookstorre;
+package store;
 
 import javax.swing.*;
 import java.awt.FlowLayout;

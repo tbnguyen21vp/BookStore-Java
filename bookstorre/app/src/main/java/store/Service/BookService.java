@@ -1,9 +1,10 @@
-package bookstorre.Service;
+package store.Service;
 
-import bookstorre.Repository.BookDAO;
-import bookstorre.Model.Book;
 import java.sql.SQLException;
 import java.util.List;
+
+import store.Model.Book;
+import store.Repository.BookDAO;
 
 public class BookService {
     private BookDAO bookDAO;

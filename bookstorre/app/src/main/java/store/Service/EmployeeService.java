@@ -1,4 +1,4 @@
-package bookstorre.Service;
+package store.Service;
 
 public class EmployeeService {
     

@@ -1,4 +1,4 @@
-package bookstorre.Model;
+package store.Model;
 
 public class Admin extends User {
     private String adminRole;

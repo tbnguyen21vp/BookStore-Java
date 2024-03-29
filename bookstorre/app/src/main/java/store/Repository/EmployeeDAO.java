@@ -1,10 +1,11 @@
-package bookstorre.Repository;
+package store.Repository;
 
-import bookstorre.Model.Book;
-import bookstorre.utils.DatabaseUtils;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import store.Model.Book;
+import store.utils.DatabaseUtils;
 
 public class EmployeeDAO {
     private static final String SELECT_BOOK_BY_ID = "SELECT * FROM books WHERE bookID = ?";

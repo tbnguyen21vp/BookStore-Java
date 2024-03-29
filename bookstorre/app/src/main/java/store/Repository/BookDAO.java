@@ -1,10 +1,11 @@
-package bookstorre.Repository;
+package store.Repository;
 
-import bookstorre.Model.Book;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import bookstorre.utils.DatabaseUtils;
+
+import store.Model.Book;
+import store.utils.DatabaseUtils;
 
 public class BookDAO {
     // Assuming DatabaseUtils is already defined and includes the connect method

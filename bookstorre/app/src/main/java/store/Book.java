@@ -1,4 +1,4 @@
-package bookstorre;
+package store;
 
 public class Book {
 

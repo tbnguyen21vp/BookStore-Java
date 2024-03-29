@@ -1,4 +1,4 @@
-package bookstorre.Service;
+package store.Service;
 
 import javax.swing.*;
 import java.awt.*;

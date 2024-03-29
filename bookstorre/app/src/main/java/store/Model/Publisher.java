@@ -1,4 +1,4 @@
-package bookstorre.Model;
+package store.Model;
 
 public class Publisher {
     String publisherID;

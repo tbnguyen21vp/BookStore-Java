@@ -1,4 +1,4 @@
-package bookstorre.Model;
+package store.Model;
 import java.util.Date;
 public class Book {
     private Long bookID; // Assuming bookID is a numeric identifier

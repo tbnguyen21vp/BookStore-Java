@@ -1,13 +1,13 @@
 
-package bookstorre;
+package store;
 
 import javax.swing.*;
 
 import com.mysql.cj.xdevapi.PreparableStatement;
 import com.mysql.cj.xdevapi.Statement;
 
-import bookstorre.Service.BookService;
-import bookstorre.utils.DatabaseUtils;
+import store.Service.BookService;
+import store.utils.DatabaseUtils;
 import view.auth.*;
 
 import java.awt.*;
