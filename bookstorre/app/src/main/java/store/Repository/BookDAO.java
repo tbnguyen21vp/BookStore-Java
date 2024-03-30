@@ -9,39 +9,66 @@ import store.utils.DatabaseUtils;
 
 public class BookDAO {
     // Assuming DatabaseUtils is already defined and includes the connect method
-    private static final String INSERT_BOOK_SQL = "INSERT INTO books (bookID, title, author, publisher, price, category, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_BOOK_SQL = "INSERT INTO books (bookID, title, author, publisher, price, category, status, volume) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_BOOK_BY_ID = "SELECT * FROM books WHERE bookID =?";
-    private static final String SELECT_ALL_BOOKS = "SELECT * FROM `book`";
-    private static final String DELETE_BOOK_SQL = "DELETE FROM books WHERE bookID = ?";
-    private static final String UPDATE_BOOK_SQL = "UPDATE books SET title = ?, author = ?, publisher = ?, price = ?, category = ?, status = ? WHERE bookID = ?";
+    private static final String SELECT_ALL_BOOKS = "SELECT book.bookID, book.title, author.name AS authorName, publisher.name AS publisherName, book.price, category.name AS categoryName, book.status\n"
+            + //
+            "FROM book\n" + //
+            "JOIN author ON book.authorID = author.authorID\n" + //
+            "JOIN publisher ON book.publisherID = publisher.publisherID\n" + //
+            "JOIN category ON book.categoryID = category.categoryID;\n" + //
+            ""; //
 
-    //add book
+    private static final String DELETE_BOOK_SQL = "DELETE FROM books WHERE bookID = ?";
+    private static final String UPDATE_BOOK_SQL = "UPDATE books SET title = ?, author = ?, publisher = ?, price = ?, category = ?, status = ?, volume = ? WHERE bookID = ?";
+
+    // add book
     public void insertBook(Book book) throws SQLException {
-        try (Connection connection = new DatabaseUtils().connect();
+        try (@SuppressWarnings("static-access")
+        Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_BOOK_SQL)) {
             preparedStatement.setLong(1, book.getBookID());
             preparedStatement.setString(2, book.getTitle());
-            preparedStatement.setLong(3, book.getAuthorID());
-            preparedStatement.setLong(4, book.getPublisherID());
+            preparedStatement.setString(3, book.getAuthor());
+            preparedStatement.setString(4, book.getPublisher());
             preparedStatement.setDouble(5, book.getPrice());
-            preparedStatement.setLong(6, book.getCategoryID());
+            preparedStatement.setString(6, book.getCategory());
             preparedStatement.setBoolean(7, book.getStatus());
+            preparedStatement.setLong(8, book.getVolume());
             preparedStatement.executeUpdate();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
+
+    // delete book
+    public boolean deleteBook(long bookID) throws SQLException {
+        try (@SuppressWarnings("static-access")
+        Connection connection = new DatabaseUtils().connect();
+                PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BOOK_SQL)) {
+            preparedStatement.setLong(1, bookID);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     // update book
     public boolean updateBook(Book book) throws SQLException {
-        try (Connection connection = new DatabaseUtils().connect();
+        try (@SuppressWarnings("static-access")
+        Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BOOK_SQL)) {
             preparedStatement.setString(1, book.getTitle());
-            preparedStatement.setLong(2, book.getAuthorID());
-            preparedStatement.setLong(3, book.getPublisherID());
+            preparedStatement.setString(2, book.getAuthor());
+            preparedStatement.setString(3, book.getPublisher());
             preparedStatement.setDouble(4, book.getPrice());
-            preparedStatement.setLong(5, book.getCategoryID());
+            preparedStatement.setString(5, book.getCategory());
             preparedStatement.setBoolean(6, book.getStatus());
             preparedStatement.setLong(7, book.getBookID());
+            preparedStatement.setLong(8, book.getVolume());
+
             int rowsAffected = preparedStatement.executeUpdate();
             return rowsAffected > 0;
         } catch (ClassNotFoundException e) {
@@ -51,7 +78,6 @@ public class BookDAO {
     }
 
     // disable book
-     
     public boolean disableBook(long bookID) throws SQLException {
         try (Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BOOK_SQL)) {
@@ -64,6 +90,7 @@ public class BookDAO {
             return false;
         }
     }
+
     // enable book
     public boolean enableBook(long bookID) throws SQLException {
         try (Connection connection = new DatabaseUtils().connect();
@@ -78,51 +105,6 @@ public class BookDAO {
         }
     }
 
-    // delete book
-
-    public boolean deleteBook(long bookID) throws SQLException {
-        try (Connection connection = new DatabaseUtils().connect();
-                PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BOOK_SQL)) {
-            preparedStatement.setLong(1, bookID);
-            int rowsAffected = preparedStatement.executeUpdate();
-            return rowsAffected > 0;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    // get all books
-
-    public List<Book> getAllBooks() throws SQLException {
-        List<Book> books = new ArrayList<>();
-        try (Connection connection = new DatabaseUtils().connect();
-                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BOOKS)) {
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-                long bookID = rs.getLong("bookID");
-                String title = rs.getString("title");
-                long authorID = rs.getLong("author");
-                long publisherID = rs.getLong("publisher");
-                double price = rs.getDouble("price");
-                long categoryID = rs.getLong("category");
-                boolean status = rs.getBoolean("status");
-                Book book = new Book(categoryID, title, categoryID, categoryID, price, categoryID, status, categoryID, null);
-                book.setBookID(bookID);
-                book.setTitle(title);
-                book.setAuthorID(authorID);
-                book.setPublisherID(publisherID);
-                book.setPrice(price);
-                book.setCategoryID(categoryID);
-                book.setStatus(status);
-                books.add(book);
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return books;
-    }
-   
     // get book by id
     public Book selectBook(long bookID) throws SQLException {
         Book book = null;
@@ -130,22 +112,15 @@ public class BookDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BOOK_BY_ID)) {
             preparedStatement.setLong(1, bookID);
             ResultSet rs = preparedStatement.executeQuery();
-
             if (rs.next()) {
                 String title = rs.getString("title");
-                long authorID = rs.getLong("author");
-                long publisherID = rs.getLong("publisher");
+                String author = rs.getString("author");
+                String publisher = rs.getString("publisher");
                 double price = rs.getDouble("price");
-                long categoryID = rs.getLong("category");
+                String category = rs.getString("category");
                 boolean status = rs.getBoolean("status");
-                book = new Book(categoryID, title, categoryID, categoryID, price, categoryID, status, categoryID, null);
-                book.setBookID(bookID);
-                book.setTitle(title);
-                book.setAuthorID(authorID);
-                book.setPublisherID(publisherID);
-                book.setPrice(price);
-                book.setCategoryID(categoryID);
-                book.setStatus(status);
+                long volume = rs.getLong("volume");
+                book = new Book(bookID, title, author, publisher, price, category, status, volume);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -153,7 +128,32 @@ public class BookDAO {
         return book;
     }
 
+    // get all books
+    public List<Book> getAllBooks() throws SQLException {
+        List<Book> books = new ArrayList<>();
+        try (Connection connection = new DatabaseUtils().connect();
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BOOKS)) {
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                long bookID = rs.getLong("bookID");
+                String title = rs.getString("title");
+                String author = rs.getString("authorName"); // Đọc trường tên tác giả dưới dạng chuỗi
+                String publisher = rs.getString("publisherName"); // Đọc trường tên nhà xuất bản dưới dạng chuỗi
+                double price = rs.getDouble("price");
+                String category = rs.getString("categoryName");
+                boolean status = rs.getBoolean("status");
+                long volume = rs.getLong("volume");
 
+                // Create a new Book object and set its properties
+                Book book = new Book(bookID, title, author, publisher, price, category, status, volume);
 
+                // Add the book object to the list of books
+                books.add(book);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return books;
+    }
 
 }

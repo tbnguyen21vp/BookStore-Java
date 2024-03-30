@@ -5,8 +5,13 @@ import java.sql.ResultSet;
 public class Category {
     private String categoryID;
     private String categoryName;
-    private String categoryDescription;
     private Boolean status;
+
+    public Category(String categoryID, String categoryName, Boolean status) {
+        this.categoryID = categoryID;
+        this.categoryName = categoryName;
+        this.status = status;
+    }
 
     // Getters
     public String getCategoryID() {
@@ -15,10 +20,6 @@ public class Category {
 
     public String getCategoryName() {
         return categoryName;
-    }
-
-    public String getCategoryDescription() {
-        return categoryDescription;
     }
 
     public Boolean getStatus() {
@@ -35,10 +36,6 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    public void setCategoryDescription(String categoryDescription) {
-        this.categoryDescription = categoryDescription;
-    }
-
     public void setStatus(Boolean status) {
         this.status = status;
     }
@@ -48,20 +45,12 @@ public class Category {
         return "Caretory{" +
                 "categoryID='" + categoryID + '\'' +
                 ", categoryName='" + categoryName + '\'' +
-                ", categoryDescription='" + categoryDescription + '\'' +
                 ", status=" + status +
                 '}';
     }
 
-    public Category(String categoryID, String categoryName, String categoryDescription, Boolean status) {
-        this.categoryID = categoryID;
-        this.categoryName = categoryName;
-        this.categoryDescription = categoryDescription;
-        this.status = status;
-    }
-
     public Category(ResultSet rs) {
-        //TODO Auto-generated constructor stub
+        // TODO Auto-generated constructor stub
     }
 
 }

@@ -29,7 +29,14 @@ public class DatabaseUtils {
         // Load the MySQL JDBC driver
         Class.forName("com.mysql.cj.jdbc.Driver");
         // Establish a connection
-        return DriverManager.getConnection(url, user, password);
+        Connection connection = DriverManager.getConnection(url, user, password);
+
+        // Chọn cơ sở dữ liệu
+        try (Statement statement = connection.createStatement()) {
+            statement.execute("USE book_store;");
+        }
+
+        return connection;
     }
 
     public void printTableNames() {
@@ -54,6 +61,16 @@ public class DatabaseUtils {
     public PreparableStatement prepareStatement(String string) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'prepareStatement'");
+    }
+
+    public static Connection connectToDatabase() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'connectToDatabase'");
+    }
+
+    public static void closeConnection(Connection connection) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'closeConnection'");
     }
 
 }

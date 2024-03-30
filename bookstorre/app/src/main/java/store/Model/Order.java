@@ -1,18 +1,19 @@
 package store.Model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
     private String orderID;
     private Date date;
-    private String customerID;
-    private String employeeID;
+    private Long customerID;
+    private Long employeeID;
     private Double totalCost;
     private Double discount;
     private String status;
+    private List<OrderDetail> orderDetails;
 
-    // Constructor
-    public Order(String orderID, Date date, String customerID, String employeeID, Double totalCost, Double discount,
+    public Order(String orderID, Date date, Long customerID, Long employeeID, Double totalCost, Double discount,
             String status) {
         this.orderID = orderID;
         this.date = date;
@@ -21,6 +22,18 @@ public class Order {
         this.totalCost = totalCost;
         this.discount = discount;
         this.status = status;
+    }
+
+    public Order(String orderID, Date date, Long customerID, Long employeeID, Double totalCost, Double discount,
+            String status, List<OrderDetail> orderDetails) {
+        this.orderID = orderID;
+        this.date = date;
+        this.customerID = customerID;
+        this.employeeID = employeeID;
+        this.totalCost = totalCost;
+        this.discount = discount;
+        this.status = status;
+        this.orderDetails = orderDetails;
     }
 
     // Getters
@@ -32,12 +45,8 @@ public class Order {
         return date;
     }
 
-    public String getCustomerID() {
+    public Long getCustomerID() {
         return customerID;
-    }
-
-    public String getEmployeeID() {
-        return employeeID;
     }
 
     public Double getTotalCost() {
@@ -52,6 +61,10 @@ public class Order {
         return status;
     }
 
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
     // Setters
 
     public void setOrderID(String orderID) {
@@ -62,12 +75,8 @@ public class Order {
         this.date = date;
     }
 
-    public void setCustomerID(String customerID) {
+    public void setCustomerID(Long customerID) {
         this.customerID = customerID;
-    }
-
-    public void setEmployeeID(String employeeID) {
-        this.employeeID = employeeID;
     }
 
     public void setTotalCost(Double totalCost) {
@@ -80,6 +89,24 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderID='" + orderID + '\'' +
+                ", date=" + date +
+                ", customerID=" + customerID +
+                ", employeeID=" + employeeID +
+                ", totalCost=" + totalCost +
+                ", discount=" + discount +
+                ", status='" + status + '\'' +
+                ", orderDetails=" + orderDetails +
+                "} \n";
     }
 
 }

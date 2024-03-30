@@ -30,7 +30,6 @@ public class PublisherDAO {
     }
 
     // update publisher
-
     public boolean updatePublisher(Publisher publisher) throws SQLException {
         boolean rowUpdated;
         try (Connection connection = new DatabaseUtils().connect();
@@ -64,6 +63,7 @@ public class PublisherDAO {
     }
 
     // enable publisher
+
     public boolean enablePublisher(String publisherID) throws SQLException {
         boolean rowUpdated;
         try (Connection connection = new DatabaseUtils().connect();
@@ -79,37 +79,56 @@ public class PublisherDAO {
         return rowUpdated;
     }
 
-    // Compare this snippet from
-    // bookstorre/app/src/main/java/bookstorre/Repository/PublisherDAO.java:
-    public Publisher getPublisherByID(String publisherID) throws SQLException, ClassNotFoundException {
+    // select publisher by id
+    public Publisher selectPublisher(String publisherID) {
         Publisher publisher = null;
         try (Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PUBLISHER_BY_ID)) {
             preparedStatement.setString(1, publisherID);
             ResultSet rs = preparedStatement.executeQuery();
 
-            if (rs.next()) {
-                publisher = new Publisher(rs.getString("publisherID"), rs.getString("publisherName"), publisherID,
-                        rs.getBoolean("status"));
+            while (rs.next()) {
+                String publisherName = rs.getString("publisherName");
+                Boolean status = rs.getBoolean("status");
+                publisher = new Publisher(publisherID, publisherName, status);
             }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
         return publisher;
     }
 
-    // get all publishers
-    public List<Publisher> getAllPublishers() throws SQLException, ClassNotFoundException {
+    // select all publishers
+    public List<Publisher> getAllPublishers() {
         List<Publisher> publishers = new ArrayList<>();
-        DatabaseUtils databaseUtils = new DatabaseUtils(); // Create an instance of DatabaseUtils
-        try (Connection connection = databaseUtils.connect(); // Call connect() on the instance
+        try (Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_PUBLISHERS)) {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                Publisher publisher = new Publisher(rs.getString("publisherID"), rs.getString("publisherName"),
-                        rs.getString("publisherID"), rs.getBoolean("status"));
+                String publisherID = rs.getString("publisherID");
+                String publisherName = rs.getString("publisherName");
+                Boolean status = rs.getBoolean("status");
+                Publisher publisher = new Publisher(publisherID, publisherName, status);
                 publishers.add(publisher);
             }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
         return publishers;
     }
+
+    // delete publisher
+    public boolean deletePublisher(String publisherID) throws SQLException {
+        try (Connection connection = new DatabaseUtils().connect();
+                PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PUBLISHER_SQL)) {
+            preparedStatement.setString(1, publisherID);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

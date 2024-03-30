@@ -14,15 +14,15 @@ public class BookService {
     }
 
     // Adds a new book to the database
-    public boolean addBook(Book book) {
-        try {
-            bookDAO.insertBook(book);
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Error adding book: " + e.getMessage());
-            return false;
-        }
-    }
+    // public boolean addBook(Book book) {
+    //     try {
+    //         bookDAO.insertBook(book);
+    //         return true;
+    //     } catch (SQLException e) {
+    //         System.out.println("Error adding book: " + e.getMessage());
+    //         return false;
+    //     } 
+    // }
 
     // get all books
     public List<Book> getAllBooks() throws ClassNotFoundException {
