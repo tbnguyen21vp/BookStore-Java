@@ -71,5 +71,24 @@
             }
             return orderDetails;
         }
+        // create order
+        public boolean createOrder(Order order) throws SQLException, ClassNotFoundException {
+            String sql = "INSERT INTO orders (orderID, date, customerID, employeeID, discount, status, totalCost) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            try (Connection connection = new DatabaseUtils().connect();
+                    PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, order.getOrderID());
+                preparedStatement.setDate(2, order.getDate());
+                preparedStatement.setLong(3, order.getCustomerID());
+                preparedStatement.setLong(4, order.getEmployeeID());
+                preparedStatement.setDouble(5, order.getDiscount());
+                preparedStatement.setString(6, order.getStatus());
+                preparedStatement.setDouble(7, order.getTotalCost());
+                int rowsAffected = preparedStatement.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                System.out.println("Error creating order: " + e.getMessage());
+                return false;
+            }
+        }
     
     }
