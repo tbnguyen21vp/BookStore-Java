@@ -48,7 +48,6 @@ CREATE TABLE IF NOT EXISTS `category` (
 CREATE TABLE IF NOT EXISTS `book` (
   `bookID` BIGINT AUTO_INCREMENT,
   `title` VARCHAR(255) NOT NULL,
-  `author` VARCHAR(255) NOT NULL,
   `price` DOUBLE NOT NULL,
   `status` BOOLEAN NOT NULL,
   `volume` BIGINT,
@@ -60,19 +59,17 @@ CREATE TABLE IF NOT EXISTS `book` (
   FOREIGN KEY (`categoryID`) REFERENCES `category` (`categoryID`) ON DELETE SET NULL,
   FOREIGN KEY (`authorID`) REFERENCES `author` (`authorID`) ON DELETE SET NULL
 );
-
 CREATE TABLE IF NOT EXISTS `orders` (
   `orderID` BIGINT AUTO_INCREMENT,
   `date` DATE NOT NULL,
-  `customerID` BIGINT NOT NULL,
+  `customerID` BIGINT,
   `employeeID` BIGINT NOT NULL,
   `totalCost` DOUBLE NOT NULL,
   `discount` BIGINT NOT NULL,
-  `status` BIGINT NOT NULL,
+  `status` BOOLEAN NOT NULL,
   PRIMARY KEY (`orderID`),
   FOREIGN KEY (`customerID`) REFERENCES `customer` (`customerID`) ON DELETE CASCADE,
   FOREIGN KEY (`employeeID`) REFERENCES `account` (`userID`) ON DELETE CASCADE
-  
 );
 
 CREATE TABLE IF NOT EXISTS `order_detail` (
@@ -84,4 +81,3 @@ CREATE TABLE IF NOT EXISTS `order_detail` (
   FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`) ON DELETE CASCADE,
   FOREIGN KEY (`bookID`) REFERENCES `book` (`bookID`) ON DELETE CASCADE
 );
-

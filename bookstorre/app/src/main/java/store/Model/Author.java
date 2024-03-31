@@ -1,12 +1,23 @@
 package store.Model;
 
 public class Author {
-    private String authorID;
+    private int authorID;
     private String authorName;
     private Boolean status;
 
+    public Author(int authorID, String authorName, Boolean status) {
+        this.authorID = authorID;
+        this.authorName = authorName;
+        this.status = status;
+    }
+
+    public Author(String authorName, Boolean status) {
+        this.authorName = authorName;
+        this.status = status;
+    }
+
     // Getters
-    public String getAuthorID() {
+    public int getAuthorID() {
         return authorID;
     }
 
@@ -20,7 +31,7 @@ public class Author {
 
     // Setters
 
-    public void setAuthorID(String authorID) {
+    public void setAuthorID(int authorID) {
         this.authorID = authorID;
     }
 

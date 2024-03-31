@@ -1,11 +1,11 @@
 package store.Model;
 
 public class Publisher {
-    String publisherID;
+    int publisherID;
     String publisherName;
     Boolean status;
 
-    public Publisher(String publisherID, String publisherName, Boolean status) {
+    public Publisher(int publisherID, String publisherName, Boolean status) {
         this.publisherID = publisherID;
         this.publisherName = publisherName;
         this.status = status;
@@ -13,7 +13,7 @@ public class Publisher {
 
     // Getters
 
-    public String getPublisherID() {
+    public int getPublisherID() {
         return publisherID;
     }
 
@@ -21,23 +21,19 @@ public class Publisher {
         return publisherName;
     }
 
-
-
     public Boolean getStatus() {
         return status;
     }
 
     // Setters
 
-    public void setPublisherID(String publisherID) {
+    public void setPublisherID(int publisherID) {
         this.publisherID = publisherID;
     }
 
     public void setPublisherName(String publisherName) {
         this.publisherName = publisherName;
     }
-
-
 
     public void setStatus(Boolean status) {
         this.status = status;

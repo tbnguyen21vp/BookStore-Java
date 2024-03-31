@@ -1,18 +1,16 @@
 package store.Model;
 
 public class OrderDetail {
-    private Long idOrderDetail;
+    private int idOrderDetail;
     private int orderID;
-    private Long bookID;
+    private int bookID;
     private String title;
     private Double price;
     private Long quantity;
-
     
-
     // Getters
 
-    public OrderDetail(Long idOrderDetail, Long bookID, int orderID, Long quantity, String title, Double price) {
+    public OrderDetail(int idOrderDetail, int bookID, int orderID, Long quantity, String title, Double price) {
         this.idOrderDetail = idOrderDetail;
         this.orderID = orderID;
         this.bookID = bookID;
@@ -21,7 +19,7 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
-    public Long getIdOrderDetail() {
+    public int getIdOrderDetail() {
         return idOrderDetail;
     }
     
@@ -29,7 +27,7 @@ public class OrderDetail {
         return orderID;
     }
 
-    public Long getBookID() {
+    public int getBookID() {
         return bookID;
     }
 
@@ -47,7 +45,7 @@ public class OrderDetail {
 
     // Setters
 
-    public void setIdOrderDetail(Long idOrderDetail) {
+    public void setIdOrderDetail(int idOrderDetail) {
         this.idOrderDetail = idOrderDetail;
     }
 
@@ -55,7 +53,7 @@ public class OrderDetail {
         this.orderID = orderID;
     }
 
-    public void setBookID(Long bookID) {
+    public void setBookID(int bookID) {
         this.bookID = bookID;
     }
 

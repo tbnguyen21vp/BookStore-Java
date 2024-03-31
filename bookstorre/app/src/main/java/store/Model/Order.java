@@ -4,17 +4,18 @@ import java.util.Date;
 import java.util.List;
 
 public class Order {
-    private String orderID;
+    private int orderID;
     private Date date;
-    private Long customerID;
-    private Long employeeID;
+    private int customerID;
+    private int employeeID;
     private Double totalCost;
     private Double discount;
-    private String status;
+    private Boolean status;
     private List<OrderDetail> orderDetails;
 
-    public Order(String orderID, Date date, Long customerID, Long employeeID, Double totalCost, Double discount,
-            String status) {
+    public Order(
+            int orderID, Date date, int customerID, int employeeID, Double totalCost, Double discount,
+            Boolean status) {
         this.orderID = orderID;
         this.date = date;
         this.customerID = customerID;
@@ -24,8 +25,8 @@ public class Order {
         this.status = status;
     }
 
-    public Order(String orderID, Date date, Long customerID, Long employeeID, Double totalCost, Double discount,
-            String status, List<OrderDetail> orderDetails) {
+    public Order(int orderID, Date date, int customerID, int employeeID, Double totalCost, Double discount,
+            Boolean status, List<OrderDetail> orderDetails) {
         this.orderID = orderID;
         this.date = date;
         this.customerID = customerID;
@@ -37,7 +38,7 @@ public class Order {
     }
 
     // Getters
-    public String getOrderID() {
+    public int getOrderID() {
         return orderID;
     }
 
@@ -45,7 +46,7 @@ public class Order {
         return date;
     }
 
-    public Long getCustomerID() {
+    public int getCustomerID() {
         return customerID;
     }
 
@@ -57,7 +58,7 @@ public class Order {
         return discount;
     }
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
@@ -67,7 +68,7 @@ public class Order {
 
     // Setters
 
-    public void setOrderID(String orderID) {
+    public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
 
@@ -75,7 +76,7 @@ public class Order {
         this.date = date;
     }
 
-    public void setCustomerID(Long customerID) {
+    public void setCustomerID(int customerID) {
         this.customerID = customerID;
     }
 
@@ -87,7 +88,7 @@ public class Order {
         this.discount = discount;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

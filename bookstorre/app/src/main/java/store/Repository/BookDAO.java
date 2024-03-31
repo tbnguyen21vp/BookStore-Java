@@ -9,7 +9,7 @@ import store.utils.DatabaseUtils;
 
 public class BookDAO {
     // Assuming DatabaseUtils is already defined and includes the connect method
-    private static final String INSERT_BOOK_SQL = "INSERT INTO books (bookID, title, author, publisher, price, category, status, volume) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_BOOK_SQL = "INSERT INTO books ( title, author, publisher, price, category, status, volume) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_BOOK_BY_ID = "SELECT * FROM books WHERE bookID =?";
     private static final String SELECT_ALL_BOOKS = "SELECT book.bookID, book.title, author.name AS authorName, publisher.name AS publisherName, book.price, category.name AS categoryName, book.status\n"
             + //
@@ -27,14 +27,13 @@ public class BookDAO {
         try (@SuppressWarnings("static-access")
         Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_BOOK_SQL)) {
-            preparedStatement.setLong(1, book.getBookID());
-            preparedStatement.setString(2, book.getTitle());
-            preparedStatement.setString(3, book.getAuthor());
-            preparedStatement.setString(4, book.getPublisher());
-            preparedStatement.setDouble(5, book.getPrice());
-            preparedStatement.setString(6, book.getCategory());
-            preparedStatement.setBoolean(7, book.getStatus());
-            preparedStatement.setLong(8, book.getVolume());
+            preparedStatement.setString(1, book.getTitle());
+            preparedStatement.setString(2, book.getAuthor());
+            preparedStatement.setString(3, book.getPublisher());
+            preparedStatement.setDouble(4, book.getPrice());
+            preparedStatement.setString(5, book.getCategory());
+            preparedStatement.setBoolean(6, book.getStatus());
+            preparedStatement.setLong(7, book.getVolume());
             preparedStatement.executeUpdate();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -106,7 +105,7 @@ public class BookDAO {
     }
 
     // get book by id
-    public Book selectBook(long bookID) throws SQLException {
+    public Book selectBook(int bookID) throws SQLException {
         Book book = null;
         try (Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BOOK_BY_ID)) {
@@ -119,7 +118,7 @@ public class BookDAO {
                 double price = rs.getDouble("price");
                 String category = rs.getString("category");
                 boolean status = rs.getBoolean("status");
-                long volume = rs.getLong("volume");
+                int volume = rs.getInt("volume");
                 book = new Book(bookID, title, author, publisher, price, category, status, volume);
             }
         } catch (ClassNotFoundException e) {
@@ -135,14 +134,14 @@ public class BookDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BOOKS)) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                long bookID = rs.getLong("bookID");
+                int bookID = rs.getInt("bookID");
                 String title = rs.getString("title");
                 String author = rs.getString("authorName"); // Đọc trường tên tác giả dưới dạng chuỗi
                 String publisher = rs.getString("publisherName"); // Đọc trường tên nhà xuất bản dưới dạng chuỗi
                 double price = rs.getDouble("price");
                 String category = rs.getString("categoryName");
                 boolean status = rs.getBoolean("status");
-                long volume = rs.getLong("volume");
+                int volume = rs.getInt("volume");
 
                 // Create a new Book object and set its properties
                 Book book = new Book(bookID, title, author, publisher, price, category, status, volume);

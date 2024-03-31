@@ -13,17 +13,15 @@ import store.utils.DatabaseUtils;
 public class CategoryDAO {
     private static final String SELECT_CATEGORY_BY_ID = "SELECT * FROM categories WHERE categoryID = ?";
     private static final String SELECT_ALL_CATEGORIES = "SELECT * FROM categories";
-    private static final String UPDATE_CATEGORY_SQL = "UPDATE categories SET ... WHERE categoryID = ?";
+    private static final String UPDATE_CATEGORY_SQL = "UPDATE categories SET name = ?, status = ? WHERE categoryID = ?";
     private static final String DELETE_CATEGORY_SQL = "DELETE FROM categories WHERE categoryID = ?";
-    private static final String INSERT_CATEGORY_SQL = "INSERT INTO categories (categoryID, categoryName, status) VALUES (?, ?, ?)";
+    private static final String INSERT_CATEGORY_SQL = "INSERT INTO categories (categoryName) VALUES (?)";
 
     // add category
     public void addCategory(Category category) throws SQLException {
         try (Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CATEGORY_SQL)) {
-            preparedStatement.setString(1, category.getCategoryID());
-            preparedStatement.setString(2, category.getCategoryName());
-            preparedStatement.setBoolean(3, category.getStatus());
+            preparedStatement.setString(1, category.getCategoryName());
             preparedStatement.executeUpdate();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -37,7 +35,7 @@ public class CategoryDAO {
                 PreparedStatement statement = connection.prepareStatement(UPDATE_CATEGORY_SQL)) {
             statement.setString(1, category.getCategoryName());
             statement.setBoolean(2, category.getStatus());
-            statement.setString(3, category.getCategoryID());
+            statement.setInt(3, category.getCategoryID());
 
             rowUpdated = statement.executeUpdate() > 0;
         } catch (ClassNotFoundException e) {
@@ -88,8 +86,11 @@ public class CategoryDAO {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                // Assuming Category class has a constructor that takes ResultSet or its data
-                categories.add(new Category(rs));
+                int categoryID = rs.getInt("categoryID");
+                String categoryName = rs.getString("name");
+                boolean status = rs.getBoolean("status");
+                Category category = new Category(categoryID, categoryName, status);
+                categories.add(category);
             }
         }
         return categories;

@@ -8,21 +8,19 @@ import store.Model.Publisher;
 import store.utils.DatabaseUtils;
 
 public class PublisherDAO {
-    private static final String INSERT_PUBLISHER_SQL = "INSERT INTO publishers (publisherID, publisherName, status) VALUES (?, ?, ?)";
-    private static final String SELECT_PUBLISHER_BY_ID = "SELECT * FROM publishers WHERE publisherID = ?";
-    private static final String SELECT_ALL_PUBLISHERS = "SELECT * FROM publishers";
-    private static final String UPDATE_PUBLISHER_SQL = "UPDATE publishers SET publisherName = ?, status = ? WHERE publisherID = ?";
-    private static final String DELETE_PUBLISHER_SQL = "DELETE FROM publishers WHERE publisherID = ?";
-    private static final String DISABLE_PUBLISHER_SQL = "UPDATE publishers SET status = ? WHERE publisherID = ?";
-    private static final String ENABLE_PUBLISHER_SQL = "UPDATE publishers SET status = ? WHERE publisherID = ?";
+    private static final String INSERT_PUBLISHER_SQL = "INSERT INTO publisher (name) VALUES (?)";
+    private static final String SELECT_PUBLISHER_BY_ID = "SELECT * FROM publisher WHERE publisherID = ?";
+    private static final String SELECT_ALL_PUBLISHERS = "SELECT * FROM publisher";
+    private static final String UPDATE_PUBLISHER_SQL = "UPDATE publisher SET name = ?, status = ? WHERE publisherID = ?";
+    private static final String DELETE_PUBLISHER_SQL = "DELETE FROM publisher WHERE publisherID = ?";
+    private static final String DISABLE_PUBLISHER_SQL = "UPDATE publisher SET status = ? WHERE publisherID = ?";
+    private static final String ENABLE_PUBLISHER_SQL = "UPDATE publisher SET status = ? WHERE publisherID = ?";
 
     // add publisher
     public void addPublisher(Publisher publisher) throws SQLException {
         try (Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PUBLISHER_SQL)) {
-            preparedStatement.setString(1, publisher.getPublisherID());
-            preparedStatement.setString(2, publisher.getPublisherName());
-            preparedStatement.setBoolean(3, publisher.getStatus());
+            preparedStatement.setString(1, publisher.getPublisherName());
             preparedStatement.executeUpdate();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -36,7 +34,7 @@ public class PublisherDAO {
                 PreparedStatement statement = connection.prepareStatement(UPDATE_PUBLISHER_SQL)) {
             statement.setString(1, publisher.getPublisherName());
             statement.setBoolean(2, publisher.getStatus());
-            statement.setString(3, publisher.getPublisherID());
+            statement.setInt(3, publisher.getPublisherID());
 
             rowUpdated = statement.executeUpdate() > 0;
         } catch (ClassNotFoundException e) {
@@ -80,15 +78,15 @@ public class PublisherDAO {
     }
 
     // select publisher by id
-    public Publisher selectPublisher(String publisherID) {
+    public Publisher selectPublisher(int publisherID) {
         Publisher publisher = null;
         try (Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PUBLISHER_BY_ID)) {
-            preparedStatement.setString(1, publisherID);
+            preparedStatement.setInt(1, publisherID);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                String publisherName = rs.getString("publisherName");
+                String publisherName = rs.getString("name");
                 Boolean status = rs.getBoolean("status");
                 publisher = new Publisher(publisherID, publisherName, status);
             }
@@ -106,8 +104,8 @@ public class PublisherDAO {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                String publisherID = rs.getString("publisherID");
-                String publisherName = rs.getString("publisherName");
+                int publisherID = rs.getInt("publisherID");
+                String publisherName = rs.getString("name");
                 Boolean status = rs.getBoolean("status");
                 Publisher publisher = new Publisher(publisherID, publisherName, status);
                 publishers.add(publisher);

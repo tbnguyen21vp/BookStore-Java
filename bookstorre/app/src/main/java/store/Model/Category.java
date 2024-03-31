@@ -3,18 +3,18 @@ package store.Model;
 import java.sql.ResultSet;
 
 public class Category {
-    private String categoryID;
+    private int categoryID;
     private String categoryName;
     private Boolean status;
 
-    public Category(String categoryID, String categoryName, Boolean status) {
+    public Category(int categoryID, String categoryName, Boolean status) {
         this.categoryID = categoryID;
         this.categoryName = categoryName;
         this.status = status;
     }
 
     // Getters
-    public String getCategoryID() {
+    public int getCategoryID() {
         return categoryID;
     }
 
@@ -28,7 +28,7 @@ public class Category {
 
     // Setters
 
-    public void setCategoryID(String categoryID) {
+    public void setCategoryID(int categoryID) {
         this.categoryID = categoryID;
     }
 

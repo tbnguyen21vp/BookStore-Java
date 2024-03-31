@@ -3,19 +3,31 @@ package store.Model;
 import java.util.Date;
 
 public class Book {
-    private Long bookID; // Assuming bookID is a numeric identifier
+    private int bookID; // Assuming bookID is a numeric identifier
     private String title;
     private String author; // Assuming author is referenced by ID
     private String publisher;
     private Double price;
     private String category; // Assuming category is referenced by ID
     private Boolean status;
-    private Long volume; // Assuming volume is a numeric field
+    private int volume; // Assuming volume is a numeric field
 
-    public Book(Long bookID, String title, String author,
+    public Book(int bookID, String title, String author,
             String publisher,
-            Double price, String category, Boolean status, Long volume) {
+            Double price, String category, Boolean status, int volume) {
         this.bookID = bookID;
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.price = price;
+        this.category = category;
+        this.status = status;
+        this.volume = volume;
+    }
+    
+    public Book( String title, String author,
+            String publisher,
+            Double price, String category, Boolean status, int volume) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
@@ -26,7 +38,7 @@ public class Book {
     }
 
     // Getters
-    public Long getBookID() {
+    public int getBookID() {
         return bookID;
     }
 
@@ -54,12 +66,12 @@ public class Book {
         return status;
     }
 
-    public Long getVolume() {
+    public int getVolume() {
         return volume;
     }
 
     // Setters
-    public void setBookID(Long bookID) {
+    public void setBookID(int bookID) {
         this.bookID = bookID;
     }
 
@@ -87,7 +99,7 @@ public class Book {
         this.status = status;
     }
 
-    public void setVolume(Long volume) {
+    public void setVolume(int volume) {
         this.volume = volume;
     }
 
