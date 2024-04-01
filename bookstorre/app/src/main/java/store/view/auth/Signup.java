@@ -1,5 +1,5 @@
 
-package view.auth;
+package store.view.auth;
 
 
 public class Signup extends javax.swing.JFrame {
