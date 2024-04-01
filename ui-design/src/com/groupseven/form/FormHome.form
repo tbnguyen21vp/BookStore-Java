@@ -75,17 +75,17 @@
         <Property name="rows" type="int" value="1"/>
       </Layout>
       <SubComponents>
-        <Component class="com.groupseven.component.Card" name="card6">
+        <Component class="com.groupseven.component.Card" name="BookCard1">
         </Component>
-        <Component class="com.groupseven.component.Card" name="card2">
+        <Component class="com.groupseven.component.Card" name="BookCard2">
         </Component>
-        <Component class="com.groupseven.component.Card" name="card5">
+        <Component class="com.groupseven.component.Card" name="BookCard3">
         </Component>
-        <Component class="com.groupseven.component.Card" name="card4">
+        <Component class="com.groupseven.component.Card" name="BookCard4">
         </Component>
-        <Component class="com.groupseven.component.Card" name="card3">
+        <Component class="com.groupseven.component.Card" name="BookCard5">
         </Component>
-        <Component class="com.groupseven.component.Card" name="card1">
+        <Component class="com.groupseven.component.Card" name="BookCard6">
         </Component>
       </SubComponents>
     </Container>
@@ -97,17 +97,17 @@
         <Property name="rows" type="int" value="1"/>
       </Layout>
       <SubComponents>
-        <Component class="com.groupseven.component.Card" name="card10">
+        <Component class="com.groupseven.component.Card" name="BookCard7">
         </Component>
-        <Component class="com.groupseven.component.Card" name="card12">
+        <Component class="com.groupseven.component.Card" name="BookCard8">
         </Component>
-        <Component class="com.groupseven.component.Card" name="card11">
+        <Component class="com.groupseven.component.Card" name="BookCard9">
         </Component>
-        <Component class="com.groupseven.component.Card" name="card9">
+        <Component class="com.groupseven.component.Card" name="BookCard10">
         </Component>
-        <Component class="com.groupseven.component.Card" name="card8">
+        <Component class="com.groupseven.component.Card" name="BookCard11">
         </Component>
-        <Component class="com.groupseven.component.Card" name="card7">
+        <Component class="com.groupseven.component.Card" name="BookCard12">
         </Component>
       </SubComponents>
     </Container>

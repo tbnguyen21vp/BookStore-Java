@@ -29,19 +29,19 @@ public class FormHome extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        card6 = new com.groupseven.component.Card();
-        card2 = new com.groupseven.component.Card();
-        card5 = new com.groupseven.component.Card();
-        card4 = new com.groupseven.component.Card();
-        card3 = new com.groupseven.component.Card();
-        card1 = new com.groupseven.component.Card();
+        BookCard1 = new com.groupseven.component.Card();
+        BookCard2 = new com.groupseven.component.Card();
+        BookCard3 = new com.groupseven.component.Card();
+        BookCard4 = new com.groupseven.component.Card();
+        BookCard5 = new com.groupseven.component.Card();
+        BookCard6 = new com.groupseven.component.Card();
         jLayeredPane2 = new javax.swing.JLayeredPane();
-        card10 = new com.groupseven.component.Card();
-        card12 = new com.groupseven.component.Card();
-        card11 = new com.groupseven.component.Card();
-        card9 = new com.groupseven.component.Card();
-        card8 = new com.groupseven.component.Card();
-        card7 = new com.groupseven.component.Card();
+        BookCard7 = new com.groupseven.component.Card();
+        BookCard8 = new com.groupseven.component.Card();
+        BookCard9 = new com.groupseven.component.Card();
+        BookCard10 = new com.groupseven.component.Card();
+        BookCard11 = new com.groupseven.component.Card();
+        BookCard12 = new com.groupseven.component.Card();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
@@ -52,20 +52,20 @@ public class FormHome extends javax.swing.JPanel {
         jLabel2.setText("Sách Mới Ra Mắt");
 
         jLayeredPane1.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
-        jLayeredPane1.add(card6);
-        jLayeredPane1.add(card2);
-        jLayeredPane1.add(card5);
-        jLayeredPane1.add(card4);
-        jLayeredPane1.add(card3);
-        jLayeredPane1.add(card1);
+        jLayeredPane1.add(BookCard1);
+        jLayeredPane1.add(BookCard2);
+        jLayeredPane1.add(BookCard3);
+        jLayeredPane1.add(BookCard4);
+        jLayeredPane1.add(BookCard5);
+        jLayeredPane1.add(BookCard6);
 
         jLayeredPane2.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
-        jLayeredPane2.add(card10);
-        jLayeredPane2.add(card12);
-        jLayeredPane2.add(card11);
-        jLayeredPane2.add(card9);
-        jLayeredPane2.add(card8);
-        jLayeredPane2.add(card7);
+        jLayeredPane2.add(BookCard7);
+        jLayeredPane2.add(BookCard8);
+        jLayeredPane2.add(BookCard9);
+        jLayeredPane2.add(BookCard10);
+        jLayeredPane2.add(BookCard11);
+        jLayeredPane2.add(BookCard12);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -97,18 +97,18 @@ public class FormHome extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.groupseven.component.Card card1;
-    private com.groupseven.component.Card card10;
-    private com.groupseven.component.Card card11;
-    private com.groupseven.component.Card card12;
-    private com.groupseven.component.Card card2;
-    private com.groupseven.component.Card card3;
-    private com.groupseven.component.Card card4;
-    private com.groupseven.component.Card card5;
-    private com.groupseven.component.Card card6;
-    private com.groupseven.component.Card card7;
-    private com.groupseven.component.Card card8;
-    private com.groupseven.component.Card card9;
+    private com.groupseven.component.Card BookCard1;
+    private com.groupseven.component.Card BookCard10;
+    private com.groupseven.component.Card BookCard11;
+    private com.groupseven.component.Card BookCard12;
+    private com.groupseven.component.Card BookCard2;
+    private com.groupseven.component.Card BookCard3;
+    private com.groupseven.component.Card BookCard4;
+    private com.groupseven.component.Card BookCard5;
+    private com.groupseven.component.Card BookCard6;
+    private com.groupseven.component.Card BookCard7;
+    private com.groupseven.component.Card BookCard8;
+    private com.groupseven.component.Card BookCard9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;
