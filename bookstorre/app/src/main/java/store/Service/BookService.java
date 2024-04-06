@@ -31,4 +31,8 @@ public class BookService {
     public void deleteBook(int bookID) throws SQLException {
         bookDAO.deleteBook(bookID);
     }
+    //insert Book
+    public void insertBook(Book book) throws SQLException {
+        bookDAO.insertBook(book);
+    }
 }

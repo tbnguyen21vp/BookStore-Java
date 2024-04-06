@@ -19,35 +19,38 @@ CREATE TABLE IF NOT EXISTS `account` (
 
 CREATE TABLE IF NOT EXISTS `customer` (
   `customerID` BIGINT AUTO_INCREMENT,
-  `username` VARCHAR(255) NOT NULL,
+  `username` VARCHAR(255) NOT NULL UNIQUE,
+  `firstname` VARCHAR(255),
+  `lastname` VARCHAR(255),
   PRIMARY KEY (`customerID`)
 );
 
 
 CREATE TABLE IF NOT EXISTS `author` (
   `authorID` BIGINT AUTO_INCREMENT,
-  `name` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255) NOT NULL UNIQUE,
   `status` BOOLEAN NOT NULL,
   PRIMARY KEY (`authorID`)
 );
 
 CREATE TABLE IF NOT EXISTS `publisher` (
   `publisherID` BIGINT AUTO_INCREMENT,
-  `name` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255) NOT NULL UNIQUE,
   `status` BOOLEAN NOT NULL,
   PRIMARY KEY (`publisherID`)
 );
 
 CREATE TABLE IF NOT EXISTS `category` (
   `categoryID` BIGINT AUTO_INCREMENT,
-  `name` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255) NOT NULL UNIQUE,
   `status` BOOLEAN NOT NULL,
   PRIMARY KEY (`categoryID`)
 );
 
 CREATE TABLE IF NOT EXISTS `book` (
   `bookID` BIGINT AUTO_INCREMENT,
-  `title` VARCHAR(255) NOT NULL,
+  `title` VARCHAR(255) NOT NULL UNIQUE,
+  `author` VARCHAR(255) NOT NULL,
   `price` DOUBLE NOT NULL,
   `status` BOOLEAN NOT NULL,
   `volume` BIGINT,
@@ -66,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `employeeID` BIGINT NOT NULL,
   `totalCost` DOUBLE NOT NULL,
   `discount` BIGINT NOT NULL,
-  `status` BOOLEAN NOT NULL,
+  `status` BIGINT NOT NULL,
   PRIMARY KEY (`orderID`),
   FOREIGN KEY (`customerID`) REFERENCES `customer` (`customerID`) ON DELETE CASCADE,
   FOREIGN KEY (`employeeID`) REFERENCES `account` (`userID`) ON DELETE CASCADE

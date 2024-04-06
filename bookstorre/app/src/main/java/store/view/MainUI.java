@@ -16,6 +16,8 @@ public class MainUI<ActionEvent> extends javax.swing.JFrame {
      */
     public MainUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
+
         tableBookPanel = new TableBook(); // Khởi tạo TableBook nhưng không thêm vào JFrame ngay
         this.add(tableBookPanel);
         tableBookPanel.setBounds(50, 50, 1100, 600);
