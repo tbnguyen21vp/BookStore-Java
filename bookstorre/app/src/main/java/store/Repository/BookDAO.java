@@ -9,9 +9,9 @@ import store.utils.DatabaseUtils;
 
 public class BookDAO {
     // Assuming DatabaseUtils is already defined and includes the connect method
-    private static final String INSERT_BOOK_SQL = "INSERT INTO books ( title, author, publisher, price, category, status, volume) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SELECT_BOOK_BY_ID = "SELECT * FROM book WHERE bookID =?";
-    private static final String SELECT_ALL_BOOKS = "SELECT book.bookID, book.title, author.name AS authorName, publisher.name AS publisherName, book.price, category.name AS categoryName, book.status , book.volume\n" + //
+
+    private static final String SELECT_ALL_BOOKS = "SELECT book.bookID, book.title, author.name AS authorName, publisher.name AS publisherName, book.price, category.name AS categoryName, book.status , book.volume\n"
+            + //
             "FROM book\n" + //
             "JOIN author ON book.authorID = author.authorID\n" + //
             "JOIN publisher ON book.publisherID = publisher.publisherID\n" + //
@@ -19,20 +19,21 @@ public class BookDAO {
             ""; //
 
     private static final String DELETE_BOOK_SQL = "DELETE FROM book WHERE bookID = ?";
-    private static final String UPDATE_BOOK_SQL = "UPDATE book SET title = ?, author = ?, publisher = ?, price = ?, category = ?, status = ?, volume = ? WHERE bookID = ?";
 
     // add book
     public void insertBook(Book book) throws SQLException {
+        // --(bookTitle,bookPrice,bookVolume,authorName,categoryName,publisherName)
+        // CALL AddBook('Book 199', 10000, 1, 'Author 1', 'Category 1', 'Publisher 1');
+        String INSERT_BOOK_SQL = "CALL AddBook (?,?,?,?,?,?)";
         try (@SuppressWarnings("static-access")
         Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_BOOK_SQL)) {
             preparedStatement.setString(1, book.getTitle());
-            preparedStatement.setString(2, book.getAuthor());
-            preparedStatement.setString(3, book.getPublisher());
-            preparedStatement.setDouble(4, book.getPrice());
+            preparedStatement.setDouble(2, book.getPrice());
+            preparedStatement.setInt(3, book.getVolume());
+            preparedStatement.setString(4, book.getAuthor());
             preparedStatement.setString(5, book.getCategory());
-            preparedStatement.setBoolean(6, book.getStatus());
-            preparedStatement.setInt(7, book.getVolume());
+            preparedStatement.setString(6, book.getPublisher());
             preparedStatement.executeUpdate();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -55,17 +56,20 @@ public class BookDAO {
 
     // update book
     public boolean updateBook(Book book) throws SQLException {
+        // -- (bookID, title, price, volume, author, category, publisher, status)
+        // CALL UpdateBook(31, 'kyl', 19.99, 5, 'New Author Name', 'New Category ',Name','New Publisher Name');
+        String UPDATE_BOOK_SQL = "CALL UpdateBook(?,?,?,?,?,?,?,?)";
         try (@SuppressWarnings("static-access")
         Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BOOK_SQL)) {
-            preparedStatement.setString(1, book.getTitle());
-            preparedStatement.setString(2, book.getAuthor());
-            preparedStatement.setString(3, book.getPublisher());
-            preparedStatement.setDouble(4, book.getPrice());
-            preparedStatement.setString(5, book.getCategory());
-            preparedStatement.setBoolean(6, book.getStatus());
-            preparedStatement.setLong(7, book.getBookID());
-            preparedStatement.setLong(8, book.getVolume());
+                    preparedStatement.setLong(1, book.getBookID());
+            preparedStatement.setString(2, book.getTitle());
+            preparedStatement.setDouble(3, book.getPrice());
+            preparedStatement.setLong(4, book.getVolume());
+            preparedStatement.setString(5, book.getAuthor());
+            preparedStatement.setString(6, book.getCategory());
+            preparedStatement.setString(7, book.getPublisher());
+            preparedStatement.setBoolean(8, book.getStatus());
 
             int rowsAffected = preparedStatement.executeUpdate();
             return rowsAffected > 0;
@@ -77,6 +81,7 @@ public class BookDAO {
 
     // disable book
     public boolean disableBook(long bookID) throws SQLException {
+        String UPDATE_BOOK_SQL = "CALL UpdateBook(?,?,?,?,?,?,?,?)";
         try (Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BOOK_SQL)) {
             preparedStatement.setBoolean(6, false);
@@ -91,6 +96,7 @@ public class BookDAO {
 
     // enable book
     public boolean enableBook(long bookID) throws SQLException {
+        String UPDATE_BOOK_SQL = "CALL UpdateBook(?,?,?,?,?,?,?,?)";
         try (Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BOOK_SQL)) {
             preparedStatement.setBoolean(6, true);
@@ -105,6 +111,14 @@ public class BookDAO {
 
     // get book by id
     public Book selectBook(int bookID) throws SQLException {
+        String SELECT_BOOK_BY_ID = "SELECT book.title, book.price, author.name as author, publisher.name as publisher, category.name as category, book.volume , book.status "
+                + //
+                "FROM book " + //
+                "JOIN author ON book.authorID = author.authorID " + //
+                "JOIN publisher ON book.publisherID = publisher.publisherID " + //
+                "JOIN category ON book.categoryID = category.categoryID " + //
+                "WHERE book.bookID = ?"; //
+
         Book book = null;
         try (Connection connection = new DatabaseUtils().connect();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BOOK_BY_ID)) {

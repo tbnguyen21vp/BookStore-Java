@@ -2,9 +2,15 @@
 package store.view.employee;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import com.google.protobuf.compiler.PluginProtos.CodeGeneratorResponse.File;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import store.Model.Book;
@@ -17,11 +23,13 @@ import store.Service.BookService;
 public class TableBook extends javax.swing.JPanel {
     private BookService bookService;
     private AddBookFrame addBookFrame;
+    private EditBookFrame editBookFrame;
     private DefaultTableModel model;
 
     public TableBook() {
         bookService = new BookService();
         addBookFrame = new AddBookFrame();
+
 
         initComponents();
 
@@ -100,6 +108,7 @@ public class TableBook extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -111,6 +120,7 @@ public class TableBook extends javax.swing.JPanel {
         EditButton = new javax.swing.JButton();
         InputSearch = new javax.swing.JTextField();
         SearchButton = new javax.swing.JButton();
+        ImportSheet = new javax.swing.JButton();
 
         BookTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][] {
@@ -178,6 +188,13 @@ public class TableBook extends javax.swing.JPanel {
             }
         });
 
+        ImportSheet.setText("Import Sheet");
+        ImportSheet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImportSheetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -200,8 +217,10 @@ public class TableBook extends javax.swing.JPanel {
                                                 javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
                                         javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(RefreshButton)
-                                .addGap(82, 82, 82)));
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(RefreshButton)
+                                        .addComponent(ImportSheet))
+                                .addGap(78, 78, 78)));
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -211,18 +230,84 @@ public class TableBook extends javax.swing.JPanel {
                                         .addComponent(DeleteButton)
                                         .addComponent(EditButton)
                                         .addComponent(RefreshButton))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(InputSearch, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(SearchButton))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(InputSearch,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(SearchButton)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(ImportSheet)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565,
                                         javax.swing.GroupLayout.PREFERRED_SIZE)));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_DeleteButtonActionPerformed
+    private void importBooksFromCSV(java.io.File selectedFile) throws SQLException {
+
+        try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
+            String line;
+            br.readLine(); // Skip the header if present
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",", -1);
+                if (values.length != 6) {
+                    JOptionPane.showMessageDialog(this, "Each line must have exactly 6 values separated by commas.",
+                            "Format Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                
+                double price = Double.parseDouble(values[1].trim());
+
+                // Create a new Book object with the extracted data
+                Book newBook = new Book(
+                        values[0].trim(),
+                        values[3].trim(),
+                        values[5].trim(),
+                        price,
+                        values[4].trim(),
+                        true, // Assuming status is true for all new books
+                        Integer.parseInt(values[2].trim()));
+
+                        System.out.println(newBook);
+                // Insert the new book into the database using bookService
+                bookService.insertBook(newBook);
+            }
+            JOptionPane.showMessageDialog(this, "Books imported successfully!", "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading the CSV file: " + e.getMessage(), "File Reading Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please check the price and volume columns for correct numeric format.",
+                    "Number Format Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void ImportSheetActionPerformed(java.awt.event.ActionEvent evt) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select CSV File");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV Files", "csv");
+        fileChooser.setFileFilter(filter);
+
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            java.io.File selectedFile = fileChooser.getSelectedFile();
+            try {
+                importBooksFromCSV(selectedFile);
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         int selectedRow = BookTable.getSelectedRow();
         if (selectedRow >= 0) {
@@ -272,15 +357,27 @@ public class TableBook extends javax.swing.JPanel {
     }// GEN-LAST:event_RefreshButtonActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {
-
         addBookFrame.setVisible(true);
 
     }
 
     private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // Get the selected row index
+        int selectedRowIndex = BookTable.getSelectedRow();
 
+        // Check if a row is selected
+        if (selectedRowIndex >= 0) {
+            // Get the ID of the selected book from the first column of the table model
+            int selectedBookId = (int) BookTable.getModel().getValueAt(selectedRowIndex, 0);
+
+            // Open the EditBookFrame passing the selectedBookId as a parameter
+            EditBookFrame editBookFrame = new EditBookFrame(selectedBookId);
+            editBookFrame.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a book to edit.", "No Book Selected",
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }
-
     private void InputSearchActionPerformed(java.awt.event.ActionEvent evt) {
 
     }
@@ -290,6 +387,7 @@ public class TableBook extends javax.swing.JPanel {
     private javax.swing.JTable BookTable;
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton EditButton;
+    private javax.swing.JButton ImportSheet;
     private javax.swing.JTextField InputSearch;
     private javax.swing.JButton RefreshButton;
     private javax.swing.JButton SearchButton;

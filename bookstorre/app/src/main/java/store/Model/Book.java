@@ -36,6 +36,18 @@ public class Book {
         this.status = status;
         this.volume = volume;
     }
+    
+    public Book(String title, String author,
+            String publisher,
+            Double price, String category, int volume) {
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.price = price;
+        this.category = category;
+    
+        this.volume = volume;
+    }
 
     // Getters
     public int getBookID() {

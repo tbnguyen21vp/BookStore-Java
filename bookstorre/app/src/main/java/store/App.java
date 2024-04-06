@@ -22,12 +22,10 @@ public class App {
     public static void main(String args[]) throws SQLException, ClassNotFoundException {
         MainUI mainUI = new MainUI();
         mainUI.setVisible(true);
+
     }
 
 }
-
-
-
 
 // MainUI mainUI = new MainUI();
 
@@ -35,24 +33,23 @@ public class App {
 
 // try
 // {
-//     // Initialize BookService
-//     BookService bookService = new BookService();
+// // Initialize BookService
+// BookService bookService = new BookService();
 
-//     // Retrieve all books using BookService
-//     List<store.Model.Book> allBooks = bookService.getAllBooks();
+// // Retrieve all books using BookService
+// List<store.Model.Book> allBooks = bookService.getAllBooks();
 
-//     // Display the books (Example: Print to console)
-//     for (store.Model.Book book : allBooks) {
-//         System.err.println("afasdf");
-//         System.out.println(book);
-//     }
+// // Display the books (Example: Print to console)
+// for (store.Model.Book book : allBooks) {
+// System.err.println("afasdf");
+// System.out.println(book);
+// }
 // }catch(
 // SQLException e)
 // {
-//             e.printStackTrace();
-//             System.out.println("Error retrieving books from database.");
-//         }
-
+// e.printStackTrace();
+// System.out.println("Error retrieving books from database.");
+// }
 
 // System.out.println("Hello World");
 // for (javax.swing.UIManager.LookAndFeelInfo info :

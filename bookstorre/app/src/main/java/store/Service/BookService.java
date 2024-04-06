@@ -35,4 +35,12 @@ public class BookService {
     public void insertBook(Book book) throws SQLException {
         bookDAO.insertBook(book);
     }
+    //update Book
+    public void updateBook(Book book) throws SQLException {
+        bookDAO.updateBook(book);
+    }
+    //get Book by ID
+    public Book selectBook(int bookID) throws SQLException {
+        return bookDAO.selectBook(bookID);
+    }
 }
