@@ -2,41 +2,63 @@
 package store;
 
 import javax.swing.*;
+
+import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
+
 import java.awt.*;
 import java.awt.print.Book;
 
-import store.Model.OrderDetail;
-import store.Repository.BookDAO;
+import store.view.*;
 import store.Service.BookService;
-import store.utils.DatabaseUtils;
-import store.view.auth.*;
+import store.view.component.*;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.ArrayList;
+import store.view.*;
 // import order DAO
-import store.Repository.OrderDAO;
+
 public class App {
 
     public static void main(String args[]) throws SQLException, ClassNotFoundException {
-        OrderDAO oder = new OrderDAO();
-          try {
-            // Thay đổi giá trị 1 bằng ID đơn hàng cụ thể mà bạn muốn lấy chi tiết
-            int orderID = 1;
-            List<OrderDetail> orderDetails = oder.getOrderDetailByID(orderID);
-            
-            // Kiểm tra nếu orderDetails không phải là null
-            if (orderDetails != null) {
-                for (OrderDetail detail : orderDetails) {
-                    System.out.println(detail);
-                }
-            } else {
-                System.out.println("Không tìm thấy chi tiết đơn hàng cho ID: " + orderID);
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            System.out.println("Lỗi khi lấy thông tin chi tiết đơn hàng: " + e.getMessage());
-        }
-
+        MainUI mainUI = new MainUI();
+        mainUI.setVisible(true);
     }
 
 }
+
+
+
+
+// MainUI mainUI = new MainUI();
+
+// mainUI.setVisible(true);
+
+// try
+// {
+//     // Initialize BookService
+//     BookService bookService = new BookService();
+
+//     // Retrieve all books using BookService
+//     List<store.Model.Book> allBooks = bookService.getAllBooks();
+
+//     // Display the books (Example: Print to console)
+//     for (store.Model.Book book : allBooks) {
+//         System.err.println("afasdf");
+//         System.out.println(book);
+//     }
+// }catch(
+// SQLException e)
+// {
+//             e.printStackTrace();
+//             System.out.println("Error retrieving books from database.");
+//         }
+
+
+// System.out.println("Hello World");
+// for (javax.swing.UIManager.LookAndFeelInfo info :
+// javax.swing.UIManager.getInstalledLookAndFeels()) {
+// if ("Nimbus".equals(info.getName())) {
+// javax.swing.UIManager.setLookAndFeel(info.getClassName());
+// break;
+// }
+// }

@@ -24,37 +24,11 @@ public class BookService {
         this.publisherDAO = new PublisherDAO();
     }
 
-    // Existing BookDAO methods
-    // ...
-
-    // New methods for Author, Category, and Publisher
-    public List<Author> getAllAuthors() throws SQLException {
-        return authorDAO.selectAllAuthors();
+    public List<Book> getAllBooks() throws SQLException {
+        return bookDAO.getAllBooks();
     }
-
-    public Author getAuthorById(int authorId) throws SQLException {
-        return authorDAO.selectAuthor(authorId);
+    // delete book
+    public void deleteBook(int bookID) throws SQLException {
+        bookDAO.deleteBook(bookID);
     }
-
-    public List<Category> getAllCategories() throws SQLException, ClassNotFoundException {
-        return categoryDAO.getAllCategories();
-    }
-
-    public Category getCategoryById(int categoryId) throws SQLException, ClassNotFoundException {
-        // Assuming CategoryDAO has a method to select by ID similar to selectAuthor in
-        // AuthorDAO
-        // return categoryDAO.selectCategoryById(categoryId);
-        return null; // Placeholder implementation
-    }
-
-    public List<Publisher> getAllPublishers() throws SQLException {
-        return publisherDAO.getAllPublishers();
-    }
-
-    public Publisher getPublisherById(int publisherId) throws SQLException {
-        return publisherDAO.selectPublisher(publisherId);
-    }
-
-    // Methods to add/update/delete authors, categories, publishers can be added
-    // similarly
 }
