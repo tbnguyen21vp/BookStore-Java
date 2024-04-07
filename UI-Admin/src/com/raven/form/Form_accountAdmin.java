@@ -1,7 +1,7 @@
 package com.raven.form;
 
 
-import com.raven.component.tableAdmin;
+
 import com.raven.model.StatusType;
 import com.raven.swing.ScrollBar;
 import java.awt.Color;
