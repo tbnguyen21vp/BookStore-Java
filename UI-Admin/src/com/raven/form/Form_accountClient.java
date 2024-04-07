@@ -48,7 +48,7 @@ public class Form_accountClient extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Email", "User Type", "Joined", "Status"
+                "Mã KH", "Tên khách hàng", "Email ", "Ngày đăng ký", "Lịch sử mua"
             }
         ) {
             boolean[] canEdit = new boolean [] {
