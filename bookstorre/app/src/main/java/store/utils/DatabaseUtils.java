@@ -13,7 +13,7 @@ public class DatabaseUtils {
     private static String password;
 
     public DatabaseUtils() {
-        this.url = "jdbc:mysql://localhost:3307/bookstore";
+        this.url = "jdbc:mysql://localhost:3306/book_store";
         this.user = "root";
         this.password = "123456";
     }
